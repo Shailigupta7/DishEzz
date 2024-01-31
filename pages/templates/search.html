@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Search Recipes{% endblock %}
+
+{% block content %}
+    <h1>Search Results</h1>
+    {% if found %}
+        <table>
+            {% for recipe in page_obj %}
+                <tr>
+                    <td colspan="3">
+                        <a href="./recipe?recipe={{ recipe.id }}">{{ recipe.name|title }}</a><br>
+                        {{ recipe.description|capfirst }}
+                    </td>
+                    <td colspan="2">
+                        <b>{{ recipe.rating }} stars</b>
+                    </td>
+                    <td colspan="2">
+                        ({{ recipe.n_ratings }} ratings)
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1>No results found!</h1>
+    {% endif %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?{{ ingredients }}&page=1">&laquo; first</a>
+                <a href="?{{ ingredients }}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?{{ ingredients }}&page={{ page_obj.next_page_number }}">next</a>
+                <a href="?{{ ingredients }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

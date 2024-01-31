@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Recipe details{% endblock %}
+
+{% block content %}
+    <h1>Recipe</h1>
+    <table>
+            <tr>
+                <td colspan="3">
+                    <strong>{{ recipe.name|title }}<br></strong>
+                    {{ recipe.description|capfirst }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Preparation Time: </b> {{ recipe.minutes }} minutes
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Nutrition info: </b>{{ recipe.nutrition|join:", " }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Ingredients: </b>{{ recipe.ingredients.all|join:", " }}
+                </td>
+            </tr>
+            <tr>
+                <td><b>Steps: </b><br>{{ recipe.steps|join:"<br>" }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Rating: </b> {{ recipe.rating }} stars
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>No. of ratings: </b> {{ recipe.n_ratings }} ratings
+                </td>
+            </tr>
+    </table>
+{% endblock %}
